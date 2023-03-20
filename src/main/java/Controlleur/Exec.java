@@ -9,9 +9,9 @@ public class Exec {
     public static void main(String[] args) {
         new Fenetre();
         try {
-            new Connexion("projet","root","");
+            new Connexion("test","root","");
         }catch (SQLException | ClassNotFoundException e){
-            System.out.println("Erreur");
+            e.printStackTrace();
         }
     }
 }

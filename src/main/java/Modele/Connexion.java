@@ -1,9 +1,6 @@
 package Modele;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Connexion {
 
@@ -14,8 +11,31 @@ public class Connexion {
         String urlDatabase = "jdbc:mysql://localhost:3306/"+ nameDatabase;
         //création d'une connexion JDBC à la base
         Connection conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
+        String requete;
+        ResultSet resultats=null;
+        /*try {
+            Statement stmt = conn.createStatement();
+            int nbMaj = stmt.executeUpdate(requete);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
+        requete = "SELECT * FROM dept";
 
-        // création d'un ordre SQL (statement)
-        Statement stmt = conn.createStatement();
+        try {
+            Statement stmt = conn.createStatement();
+           resultats = stmt.executeQuery(requete);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ResultSetMetaData rsmd = resultats.getMetaData();
+        System.out.println(rsmd.getColumnCount());
+        while (resultats.next()){
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                System.out.println(resultats.getString(i+1) + "" );
+            }
+
+        }
+        resultats.close();
     }
 }
