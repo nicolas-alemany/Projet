@@ -11,14 +11,14 @@ public class Connexion {
         String urlDatabase = "jdbc:mysql://localhost:3306/"+ nameDatabase;
         //création d'une connexion JDBC à la base
         Connection conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
-        String requete;
+        String requete = "INSERT INTO dept values (3, 'Martin', 'Gregoire')";
         ResultSet resultats=null;
-        /*try {
+        try {
             Statement stmt = conn.createStatement();
             int nbMaj = stmt.executeUpdate(requete);
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
+        }
         requete = "SELECT * FROM dept";
 
         try {
